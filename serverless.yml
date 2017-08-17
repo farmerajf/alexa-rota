@@ -1,0 +1,11 @@
+service: alexa-cookie-rota # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+
+functions:
+  handleRequest:
+    handler: main.handleRequest
+    events:
+      - alexaSkill
