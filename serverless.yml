@@ -3,9 +3,36 @@ service: alexa-cookie-rota # NOTE: update this with your service name
 provider:
   name: aws
   runtime: nodejs6.10
+  iamRoleStatements: # permissions for all of your functions can be set here
+    - Effect: Allow
+      Action: # Gives permission to DynamoDB tables in a specific region
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
 functions:
   handleRequest:
     handler: main.handleRequest
     events:
       - alexaSkill
+  
+resources:
+  Resources:
+    cookieRota:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: cookie-rota
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
