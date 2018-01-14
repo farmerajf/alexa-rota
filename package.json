@@ -1,7 +1,7 @@
 {
   "name": "alexa-cookie-rota",
   "version": "1.0.0",
-  "description": "A rote for cookie buying for Alexa",
+  "description": "A rota for cookie buying for Alexa",
   "main": "handler.js",
   "dependencies": {
     "alexa-sdk": "^1.0.11"
