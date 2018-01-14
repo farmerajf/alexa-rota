@@ -1,6 +1,7 @@
+![Alt Build status](https://travis-ci.org/farmerajf/alexa-cookie-monster.svg?branch=master)
+
+Cookie Monster is a team cookie rota to track who's next to buy the team cookies
+
 Features
-See who's next to buy cookies
-Skip a person on the rota
-Log how many cookies we brought
-Find out how much we've spent on cookies
-Cookie monster quotes
+ * Check who's next to buy cookies
+ * Skip a person on the rota
