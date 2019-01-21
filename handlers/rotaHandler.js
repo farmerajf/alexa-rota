@@ -104,17 +104,34 @@ module.exports = {
         respond(this, peopleCountResponse + listOfPeople);
     },
 
+    'DeletePersonIntent': function() {
+        log("Delete person intent");
+
+        var name = this.event.request.intent.slots.name.value;
+        var model = getModel(this);
+        var nameIndex = model.people.findIndex((e)=>{return e===name});
+
+        if (nameIndex < 0) {
+            respond(this, "I couldn't find " + name + " in the list");
+        } else {
+            model.people = model.people.splice(nameIndex, 1);
+            saveModel(this, model);
+            respond(this, "OK, I deleted " + name + " from the list");
+        }  
+    },
+
     'MoveNextIntent': function() {
         //TODO: Cope with no people on rota
 
         var model = getModel(this);
         updateNextPerson(model);
         saveModel(this, model);
-        respond(this, "Ok. Now the next person to buy cookies is " + getNextPersonName(model));
+        respond(this, "Ok. Now, next on the " + model.description + " rota is, " + getNextPersonName(model));
     },
 
     'ResetIntent': function() {
         var model = {
+            description: "cookie rota",
             nextPersonIndex: 0,
             people: ["Adam", "Ash", "Nick", "Jon", "Alastair"]
         };
